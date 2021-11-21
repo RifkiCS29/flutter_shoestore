@@ -19,3 +19,10 @@ class CategoryModel {
     };
   }
 }
+
+class UninitializedCategoryModel extends CategoryModel {
+  UninitializedCategoryModel() : super(
+    id: 0, 
+    name: ''
+  );
+}

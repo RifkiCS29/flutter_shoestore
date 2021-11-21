@@ -52,3 +52,17 @@ class ProductModel {
     };
   }
 }
+
+class UninitializedProductModel extends ProductModel {
+  UninitializedProductModel() : super(
+    id: 0,
+    name: '',
+    price: 0.0,
+    description: '',
+    tags: '',
+    category: UninitializedCategoryModel(),
+    createdAt: DateTime.now(),
+    updatedAt: DateTime.now(),
+    galleries: [],
+  );
+}
