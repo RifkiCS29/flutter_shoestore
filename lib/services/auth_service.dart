@@ -9,6 +9,7 @@ class AuthService {
   Future<UserModel> register({
     required String name,
     required String username,
+    required String address,
     required String email,
     required String password,
   }) async {
@@ -17,6 +18,7 @@ class AuthService {
     var body = jsonEncode({
       'name': name,
       'username': username,
+      'address': address,
       'email': email,
       'password': password,
     });

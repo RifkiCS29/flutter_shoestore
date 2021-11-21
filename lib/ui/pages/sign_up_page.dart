@@ -12,6 +12,7 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   TextEditingController nameController = TextEditingController(text: '');
   TextEditingController usernameController = TextEditingController(text: '');
+  TextEditingController addressController = TextEditingController(text: '');
   TextEditingController emailController = TextEditingController(text: '');
   TextEditingController passwordController = TextEditingController(text: '');
 
@@ -29,6 +30,7 @@ class _SignUpPageState extends State<SignUpPage> {
       if (await authProvider.register(
         name: nameController.text,
         username: usernameController.text,
+        address: addressController.text,
         email: emailController.text,
         password: passwordController.text,
       )) {
@@ -237,6 +239,60 @@ class _SignUpPageState extends State<SignUpPage> {
       );
     }
 
+    Widget addressInput() {
+      return Container(
+        margin: EdgeInsets.only(top: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Address',
+              style: primaryTextStyle.copyWith(
+                fontSize: 16,
+                fontWeight: medium,
+              ),
+            ),
+            SizedBox(
+              height: 12,
+            ),
+            Container(
+              height: 50,
+              padding: EdgeInsets.symmetric(
+                horizontal: 16,
+              ),
+              decoration: BoxDecoration(
+                color: backgroundColor2,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Center(
+                child: Row(
+                  children: [
+                    Image.asset(
+                      'assets/icon_username.png',
+                      width: 17,
+                    ),
+                    SizedBox(
+                      width: 16,
+                    ),
+                    Expanded(
+                      child: TextFormField(
+                        style: primaryTextStyle,
+                        controller: addressController,
+                        decoration: InputDecoration.collapsed(
+                          hintText: 'Your Adress',
+                          hintStyle: subtitleTextStyle,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
     Widget passwordInput() {
       return Container(
         margin: EdgeInsets.only(top: 20),
@@ -359,6 +415,7 @@ class _SignUpPageState extends State<SignUpPage> {
               header(),
               nameInput(),
               usernameInput(),
+              addressInput(),
               emailInput(),
               passwordInput(),
               isLoading ? LoadingButton() : signUpButton(),
