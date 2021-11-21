@@ -6,7 +6,7 @@ class TransactionService {
   String baseUrl = 'https://shamo-backend.buildwithangga.id/api';
 
   Future<bool> checkout(
-      String token, List<CartModel> carts, double totalPrice) async {
+      String token, List<CartModel> carts, String address, double totalPrice) async {
     var url = '$baseUrl/checkout';
     var headers = {
       'Content-Type': 'application/json',
@@ -14,7 +14,7 @@ class TransactionService {
     };
     var body = jsonEncode(
       {
-        'address': 'Marsemoon',
+        'address': address,
         'items': carts
             .map(
               (cart) => {

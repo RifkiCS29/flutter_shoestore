@@ -4,6 +4,7 @@ class UserModel {
   String email;
   String username;
   String profilePhotoUrl;
+  String address;
   String token;
 
   UserModel({
@@ -12,6 +13,7 @@ class UserModel {
     required this.email,
     required this.username,
     required this.profilePhotoUrl,
+    required this.address,
     required this.token,
   });
 
@@ -21,6 +23,7 @@ class UserModel {
     email: json['email'],
     username: json['username'],
     profilePhotoUrl: json['profile_photo_url'],
+    address: json['address'],
     token: json['token']
   );
 
@@ -31,6 +34,7 @@ class UserModel {
       'email': email,
       'username': username,
       'profile_photo_url': profilePhotoUrl,
+      'address': address,
       'token': token,
     };
   }

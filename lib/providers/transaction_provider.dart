@@ -4,9 +4,9 @@ import 'package:flutter_shoestore/services/transaction_service.dart';
 
 class TransactionProvider with ChangeNotifier {
   Future<bool> checkout(
-      String token, List<CartModel> carts, double totalPrice) async {
+      String token, List<CartModel> carts, String address, double totalPrice) async {
     try {
-      if (await TransactionService().checkout(token, carts, totalPrice)) {
+      if (await TransactionService().checkout(token, carts, address, totalPrice)) {
         return true;
       } else {
         return false;
