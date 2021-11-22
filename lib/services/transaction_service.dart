@@ -1,13 +1,13 @@
 import 'dart:convert';
+import 'package:flutter_shoestore/utils/constant.dart';
 import 'package:http/http.dart' as http;
 import '../models/cart_model.dart';
 
 class TransactionService {
-  String baseUrl = 'https://shamo-backend.buildwithangga.id/api';
 
   Future<bool> checkout(
       String token, List<CartModel> carts, String address, double totalPrice) async {
-    var url = '$baseUrl/checkout';
+    var url = '$baseUrl/api/checkout';
     var headers = {
       'Content-Type': 'application/json',
       'Authorization': token,

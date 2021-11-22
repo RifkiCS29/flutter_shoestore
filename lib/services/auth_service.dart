@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter_shoestore/models/user_model.dart';
+import 'package:flutter_shoestore/utils/constant.dart';
 import 'package:http/http.dart' as http;
 
 class AuthService {
-  String baseUrl = 'https://shamo-backend.buildwithangga.id/api';
 
   Future<UserModel> register({
     required String name,
@@ -13,7 +13,7 @@ class AuthService {
     required String email,
     required String password,
   }) async {
-    var url = '$baseUrl/register';
+    var url = '$baseUrl/api/register';
     var headers = {'Content-Type': 'application/json'};
     var body = jsonEncode({
       'name': name,
