@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'ui/pages/cart_page.dart';
+import 'ui/pages/checkout_page.dart';
+import 'ui/pages/checkout_success_page.dart';
 import 'ui/pages/home/main_page.dart';
 import 'ui/pages/splash_page.dart';
 import 'package:provider/provider.dart';
@@ -47,10 +50,10 @@ class MyApp extends StatelessWidget {
           '/sign-in': (context) => SignInPage(),
           '/sign-up': (context) => SignUpPage(),
           '/home': (context) => MainPage(),
-          // '/cart': (context) => CartPage(),
+          '/cart': (context) => CartPage(),
           // '/edit-profile': (context) => EditProfilePage(),
-          // '/checkout': (context) => CheckoutPage(),
-          // '/checkout-success': (context) => CheckoutSuccessPage(),
+          '/checkout': (context) => CheckoutPage(),
+          '/checkout-success': (context) => CheckoutSuccessPage(),
         },
       ),
     );
