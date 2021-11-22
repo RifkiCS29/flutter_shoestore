@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_shoestore/models/product_model.dart';
-// import 'package:flutter_shoestore/ui/pages/detail_chat_page.dart';
+import 'package:flutter_shoestore/ui/pages/detail_chat_page.dart';
 import 'package:flutter_shoestore/providers/cart_provider.dart';
 import 'package:flutter_shoestore/providers/wishlist_provider.dart';
 import 'package:flutter_shoestore/theme/theme.dart';
@@ -402,12 +402,12 @@ class _ProductPageState extends State<ProductPage> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => DetailChatPage(widget.product),
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailChatPage(widget.product),
+                        ),
+                      );
                     },
                     child: Container(
                       width: 54,
