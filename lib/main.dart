@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_shoestore/ui/pages/splash_page.dart';
+import 'ui/pages/home/main_page.dart';
+import 'ui/pages/splash_page.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/auth_provider.dart';
@@ -45,9 +46,9 @@ class MyApp extends StatelessWidget {
           '/': (context) => SplashPage(),
           '/sign-in': (context) => SignInPage(),
           '/sign-up': (context) => SignUpPage(),
-          // '/home': (context) => MainPage(),
-          // '/edit-profile': (context) => EditProfilePage(),
+          '/home': (context) => MainPage(),
           // '/cart': (context) => CartPage(),
+          // '/edit-profile': (context) => EditProfilePage(),
           // '/checkout': (context) => CheckoutPage(),
           // '/checkout-success': (context) => CheckoutSuccessPage(),
         },
