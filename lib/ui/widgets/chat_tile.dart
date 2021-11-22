@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shoestore/models/message_model.dart';
-// import 'package:flutter_shoestore/ui/pages/detail_chat_page.dart';
+import 'package:flutter_shoestore/models/product_model.dart';
+import 'package:flutter_shoestore/ui/pages/detail_chat_page.dart';
 import 'package:flutter_shoestore/theme/theme.dart';
 
 class ChatTile extends StatelessWidget {
@@ -11,14 +12,14 @@ class ChatTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) => DetailChatPage(
-        //       UninitializedProductModel(),
-        //     ),
-        //   ),
-        // );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailChatPage(
+              UninitializedProductModel(),
+            ),
+          ),
+        );
       },
       child: Container(
         margin: EdgeInsets.only(top: 33),

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "967547577990",
+    "project_id": "shoestore-4757a",
+    "storage_bucket": "shoestore-4757a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:967547577990:android:6b0fb78546e2748b939307",
+        "android_client_info": {
+          "package_name": "com.example.flutter_shoestore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "967547577990-j2tpdq1rhoosb84r76ftrlg3vr7q38qc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKqqgYdpCXRSDHnuWx_UxWSCFM5-t0jQw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "967547577990-j2tpdq1rhoosb84r76ftrlg3vr7q38qc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

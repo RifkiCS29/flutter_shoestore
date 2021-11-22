@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-//import 'package:provider/provider.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_shoestore/models/cart_model.dart';
-// import 'package:flutter_shoestore/providers/cart_provider.dart';
+import 'package:flutter_shoestore/providers/cart_provider.dart';
 import 'package:flutter_shoestore/theme/theme.dart';
 
 class CartCard extends StatelessWidget {
@@ -10,7 +10,7 @@ class CartCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // CartProvider cartProvider = Provider.of<CartProvider>(context);
+    CartProvider cartProvider = Provider.of<CartProvider>(context);
 
     return Container(
       margin: EdgeInsets.only(
@@ -64,7 +64,7 @@ class CartCard extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      // cartProvider.addQuantity(cart.id);
+                      cartProvider.addQuantity(cart.id);
                     },
                     child: Image.asset(
                       'assets/button_add.png',

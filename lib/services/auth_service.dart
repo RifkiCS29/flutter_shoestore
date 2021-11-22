@@ -13,7 +13,7 @@ class AuthService {
     required String email,
     required String password,
   }) async {
-    var url = '$baseUrl/api/register';
+    var url = '${baseUrl}public/api/register';
     var headers = {'Content-Type': 'application/json'};
     var body = jsonEncode({
       'name': name,
@@ -46,7 +46,7 @@ class AuthService {
     required String email,
     required String password,
   }) async {
-    var url = '$baseUrl/login';
+    var url = '${baseUrl}public/api/login';
     var headers = {'Content-Type': 'application/json'};
     var body = jsonEncode({
       'email': email,

@@ -7,7 +7,7 @@ class TransactionService {
 
   Future<bool> checkout(
       String token, List<CartModel> carts, String address, double totalPrice) async {
-    var url = '$baseUrl/api/checkout';
+    var url = '${baseUrl}public/api/checkout';
     var headers = {
       'Content-Type': 'application/json',
       'Authorization': token,

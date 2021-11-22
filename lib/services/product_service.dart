@@ -6,7 +6,7 @@ import 'package:flutter_shoestore/models/product_model.dart';
 class ProductService {
 
   Future<List<ProductModel>> getProducts() async {
-    var url = '$baseUrl/api/products';
+    var url = '${baseUrl}public/api/products';
     var headers = {'Content-Type': 'application/json'};
 
     var response = await http.get(Uri.parse(url), headers: headers);

@@ -28,7 +28,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
       });
 
       if (await transactionProvider.checkout(
-        authProvider.user.token,
+        authProvider.user.token!,
         cartProvider.carts,
         authProvider.user.address,
         cartProvider.totalPrice(),
@@ -130,39 +130,43 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     SizedBox(
                       width: 12,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Store Location',
-                          style: secondaryTextStyle.copyWith(
-                            fontSize: 12,
-                            fontWeight: light,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Store Location',
+                            style: secondaryTextStyle.copyWith(
+                              fontSize: 12,
+                              fontWeight: light,
+                            ),
                           ),
-                        ),
-                        Text(
-                          'Adidas Core',
-                          style: primaryTextStyle.copyWith(
-                            fontWeight: medium,
+                          Text(
+                            'Adidas Core',
+                            style: primaryTextStyle.copyWith(
+                              fontWeight: medium,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: defaultMargin,
-                        ),
-                        Text(
-                          'Your Address',
-                          style: secondaryTextStyle.copyWith(
-                            fontSize: 12,
-                            fontWeight: light,
+                          SizedBox(
+                            height: defaultMargin,
                           ),
-                        ),
-                        Text(
-                          authProvider.user.address,
-                          style: primaryTextStyle.copyWith(
-                            fontWeight: medium,
+                          Text(
+                            'Your Address',
+                            style: secondaryTextStyle.copyWith(
+                              fontSize: 12,
+                              fontWeight: light,
+                            ),
                           ),
-                        ),
-                      ],
+                          Text(
+                            authProvider.user.address,
+                            style: primaryTextStyle.copyWith(
+                              fontWeight: medium,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

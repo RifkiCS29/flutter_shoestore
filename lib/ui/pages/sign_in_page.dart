@@ -11,7 +11,6 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   TextEditingController emailController = TextEditingController(text: '');
-
   TextEditingController passwordController = TextEditingController(text: '');
 
   bool isLoading = false;
@@ -26,8 +25,8 @@ class _SignInPageState extends State<SignInPage> {
       });
 
       if (await authProvider.login(
-        email: emailController.text,
-        password: passwordController.text,
+        email: emailController.text.toString(),
+        password: passwordController.text.toString(),
       )) {
         Navigator.pushNamed(context, '/home');
       } else {
@@ -46,6 +45,8 @@ class _SignInPageState extends State<SignInPage> {
         isLoading = false;
       });
     }
+    print(emailController.text);
+    print(passwordController.text);
 
     Widget header() {
       return Container(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-// import 'package:provider/provider.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_shoestore/models/product_model.dart';
-// import 'package:flutter_shoestore/providers/wishlist_provider.dart';
+import 'package:flutter_shoestore/providers/wishlist_provider.dart';
 import 'package:flutter_shoestore/theme/theme.dart';
 
 class WishlistCard extends StatelessWidget {
@@ -10,7 +10,7 @@ class WishlistCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // WishlistProvider wishlistProvider = Provider.of<WishlistProvider>(context);
+    WishlistProvider wishlistProvider = Provider.of<WishlistProvider>(context);
 
     return Container(
       margin: EdgeInsets.only(
@@ -57,7 +57,7 @@ class WishlistCard extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              // wishlistProvider.setProduct(product);
+              wishlistProvider.setProduct(product);
             },
             child: Image.asset(
               'assets/button_wishlist_blue.png',

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shoestore/models/product_model.dart';
-// import 'package:flutter_shoestore/pages/product_page.dart';
+import 'package:flutter_shoestore/ui/pages/product_page.dart';
 import 'package:flutter_shoestore/theme/theme.dart';
 
 class ProductCard extends StatelessWidget {
@@ -11,12 +11,12 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) => ProductPage(product),
-        //   ),
-        // );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProductPage(product),
+          ),
+        );
       },
       child: Container(
         width: 215,
