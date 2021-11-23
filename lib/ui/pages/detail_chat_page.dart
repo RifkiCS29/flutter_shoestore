@@ -206,9 +206,13 @@ class _DetailChatPageState extends State<DetailChatPage> {
                     .map((MessageModel message) => ChatBubble(
                           isSender: message.isFromUser,
                           text: message.message,
-                          product: message.product!,
+                          product: message.product ?? UninitializedProductModel(),
                         ))
                     .toList(),
+              );
+            } else if(snapshot.hasError) {
+              return Center(
+                child: Text('Error: ${snapshot.error}', style: TextStyle(color: Colors.white)),
               );
             } else {
               return Center(

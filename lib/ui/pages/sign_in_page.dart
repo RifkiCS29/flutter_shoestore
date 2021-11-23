@@ -28,7 +28,7 @@ class _SignInPageState extends State<SignInPage> {
         email: emailController.text.toString(),
         password: passwordController.text.toString(),
       )) {
-        Navigator.pushNamed(context, '/home');
+        Navigator.pushReplacementNamed(context, '/home');
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(

@@ -27,7 +27,7 @@ class MessageModel {
     userName: json['userName'],
     userImage: json['userImage'],
     isFromUser: json['isFromUser'],
-    product: json['product'] == null
+    product: json['product'] == {}
         ? UninitializedProductModel()
         : ProductModel.fromJson(json['product']),
     createdAt: DateTime.parse(json['createdAt']),
@@ -41,7 +41,7 @@ class MessageModel {
       'userName': userName,
       'userImage': userImage,
       'isFromUser': isFromUser,
-      'product': product is UninitializedProductModel ? {} : product?.toJson(),
+      'product': product is UninitializedProductModel ? UninitializedProductModel() : product?.toJson(),
       'createdAt': createdAt.toString(),
       'updatedAt': updatedAt.toString(),
     };

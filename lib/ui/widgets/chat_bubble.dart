@@ -3,22 +3,23 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_shoestore/models/product_model.dart';
 import 'package:flutter_shoestore/theme/theme.dart';
 
+// ignore: must_be_immutable
 class ChatBubble extends StatelessWidget {
   final String text;
   final bool isSender;
-  final ProductModel product;
+  ProductModel? product;
 
   ChatBubble({
     this.isSender = false,
     this.text = '',
-    required this.product,
+    this.product,
   });
 
   @override
   Widget build(BuildContext context) {
     Widget productPreview() {
       return Container(
-        width: 230,
+        width: 235,
         margin: EdgeInsets.only(bottom: 12),
         padding: EdgeInsets.all(12),
         decoration: BoxDecoration(
@@ -37,7 +38,7 @@ class ChatBubble extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(12),
                   child: Image.network(
-                    product.galleries[0].url,
+                    product?.galleries[0].url ?? '',
                     width: 70,
                   ),
                 ),
@@ -49,14 +50,14 @@ class ChatBubble extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        product.name,
+                        product?.name ?? '',
                         style: primaryTextStyle,
                       ),
                       SizedBox(
                         height: 4,
                       ),
                       Text(
-                        '\$${product.price}',
+                        '\$${product?.price ?? ''}',
                         style: priceTextStyle.copyWith(
                           fontWeight: medium,
                         ),

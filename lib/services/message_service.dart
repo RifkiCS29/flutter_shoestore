@@ -14,8 +14,8 @@ class MessageService {
           .snapshots()
           .map((QuerySnapshot list) {
         var result = list.docs.map<MessageModel>((DocumentSnapshot message) {
-          print(message.data());
-          return MessageModel.fromJson({'message': message.data()});
+          print('message data: ${message.data()}');
+          return MessageModel.fromJson(message.data() as Map<String, dynamic>);
         }).toList();
 
         result.sort(
@@ -43,7 +43,7 @@ class MessageService {
         'userImage': user.profilePhotoUrl,
         'isFromUser': isFromUser,
         'message': message,
-        'product': product is UninitializedProductModel ? {} : product.toJson(),
+        'product': product is UninitializedProductModel ? UninitializedProductModel() : product.toJson(),
         'createdAt': DateTime.now().toString(),
         'updatedAt': DateTime.now().toString(),
       }).then(

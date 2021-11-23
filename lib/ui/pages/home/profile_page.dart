@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_shoestore/services/auth_service.dart';
 import 'package:flutter_shoestore/theme/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_shoestore/models/user_model.dart';
@@ -6,10 +7,19 @@ import 'package:flutter_shoestore/providers/auth_provider.dart';
 
 
 class ProfilePage extends StatelessWidget {
+  final AuthService _auth = AuthService();
+
   @override
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
     UserModel user = authProvider.user;
+
+    handleSignOut()  {
+      _auth.logout(user.token!).then((value) {
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/sign-in', (route) => false);
+      });
+    }
 
     Widget header() {
       return AppBar(
@@ -54,8 +64,7 @@ class ProfilePage extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, '/sign-in', (route) => false);
+                    handleSignOut();
                   },
                   child: Image.asset(
                     'assets/button_exit.png',
