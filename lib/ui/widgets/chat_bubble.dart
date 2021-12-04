@@ -37,10 +37,10 @@ class ChatBubble extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(12),
-                  child: Image.network(
-                    product?.galleries[0].url ?? '',
-                    width: 70,
-                  ),
+                  // child: Image.network(
+                  //   // product!.galleries[0].url,
+                  //   width: 70,
+                  // ),
                 ),
                 SizedBox(
                   width: 8,
@@ -120,8 +120,7 @@ class ChatBubble extends StatelessWidget {
         crossAxisAlignment:
             isSender ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
-          // ignore: unnecessary_null_comparison
-          product == null ? SizedBox() : productPreview(),
+          product == UninitializedProductModel() ? SizedBox() : productPreview(),
           Row(
             mainAxisAlignment:
                 isSender ? MainAxisAlignment.end : MainAxisAlignment.start,

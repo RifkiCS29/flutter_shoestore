@@ -43,7 +43,8 @@ class MessageService {
         'userImage': user.profilePhotoUrl,
         'isFromUser': isFromUser,
         'message': message,
-        'product': product is UninitializedProductModel ? UninitializedProductModel() : product.toJson(),
+        // ignore: unrelated_type_equality_checks
+        'product': product == {} ? UninitializedProductModel() : product.toJson(),
         'createdAt': DateTime.now().toString(),
         'updatedAt': DateTime.now().toString(),
       }).then(

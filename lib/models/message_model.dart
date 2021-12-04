@@ -16,7 +16,7 @@ class MessageModel {
     required this.userName,
     required this.userImage,
     required this.isFromUser,
-    required this.product,
+    this.product,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -27,7 +27,7 @@ class MessageModel {
     userName: json['userName'],
     userImage: json['userImage'],
     isFromUser: json['isFromUser'],
-    product: json['product'] == {}
+    product: json['product'] is UninitializedProductModel
         ? UninitializedProductModel()
         : ProductModel.fromJson(json['product']),
     createdAt: DateTime.parse(json['createdAt']),

@@ -206,7 +206,7 @@ class _DetailChatPageState extends State<DetailChatPage> {
                     .map((MessageModel message) => ChatBubble(
                           isSender: message.isFromUser,
                           text: message.message,
-                          product: message.product ?? UninitializedProductModel(),
+                          product: message.product,
                         ))
                     .toList(),
               );
