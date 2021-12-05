@@ -37,10 +37,12 @@ class ChatBubble extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(12),
-                  // child: Image.network(
-                  //   // product!.galleries[0].url,
-                  //   width: 70,
-                  // ),
+                  child: Image.network(
+                    product?.galleries[0].url == null 
+                    ? 'https://titan-autoparts.com/development/wp-content/uploads/2019/09/no.png'
+                    : product!.galleries[0].url,
+                    width: 70,
+                  ),
                 ),
                 SizedBox(
                   width: 8,
@@ -120,7 +122,7 @@ class ChatBubble extends StatelessWidget {
         crossAxisAlignment:
             isSender ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
-          product == UninitializedProductModel() ? SizedBox() : productPreview(),
+          product?.id == 0 ? SizedBox() : productPreview(),
           Row(
             mainAxisAlignment:
                 isSender ? MainAxisAlignment.end : MainAxisAlignment.start,
