@@ -1,16 +1,19 @@
 # flutter_shoestore
 
-A new Flutter project.
+## Screenshots
 
-## Getting Started
+<img src="https://github.com/RifkiCS29/flutter_shoestore/blob/main/screenshots/login.jpg" width="256">&nbsp;&nbsp;
+<img src="https://github.com/RifkiCS29/flutter_shoestore/blob/main/screenshots/sign_up.jpg" width="256">&nbsp;&nbsp;
+<img src="https://github.com/RifkiCS29/flutter_shoestore/blob/main/screenshots/home.jpg" width="256">&nbsp;&nbsp;
+<img src="https://github.com/RifkiCS29/flutter_shoestore/blob/main/screenshots/detail.jpg" width="256">&nbsp;&nbsp;
+<img src="https://github.com/RifkiCS29/flutter_shoestore/blob/main/screenshots/cart.jpg" width="256">&nbsp;&nbsp;
+<img src="https://github.com/RifkiCS29/flutter_shoestore/blob/main/screenshots/checkout.jpg" width="256">&nbsp;&nbsp;
+<img src="https://github.com/RifkiCS29/flutter_shoestore/blob/main/screenshots/messages.jpg" width="256">&nbsp;&nbsp;
+<img src="https://github.com/RifkiCS29/flutter_shoestore/blob/main/screenshots/chat.jpg" width="256">&nbsp;&nbsp;
+<img src="https://github.com/RifkiCS29/flutter_shoestore/blob/main/screenshots/favorites.jpg" width="256">&nbsp;&nbsp;
+<img src="https://github.com/RifkiCS29/flutter_shoestore/blob/main/screenshots/profile.jpg" width="256">&nbsp;&nbsp;
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### How To Run This Project
+1. Extract Project
+2. Flutter pub get in Terminal
+3. Setting Backend URL in utils/constant.dart 
