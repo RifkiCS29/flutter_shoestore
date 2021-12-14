@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_shoestore/providers/product_provider.dart';
 import 'package:flutter_shoestore/theme/theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -17,7 +18,12 @@ class _SplashPageState extends State<SplashPage> {
 
   getInit() async {
     await Provider.of<ProductProvider>(context, listen: false).getProducts();
-    Navigator.pushNamed(context, '/sign-in');
+    SharedPreferences _preferences = await SharedPreferences.getInstance();
+    String? _token = _preferences.getString("token");
+    Navigator.pushNamed(
+      context,       
+      _token != null ? '/home' : '/sign-in',
+    );
   }
 
   @override

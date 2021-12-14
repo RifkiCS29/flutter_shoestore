@@ -1,24 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shoestore/services/auth_service.dart';
 import 'package:flutter_shoestore/theme/theme.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter_shoestore/models/user_model.dart';
-import 'package:flutter_shoestore/providers/auth_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
   final AuthService _auth = AuthService();
+
+  String? _name;
+  String? _username;
+  String? _token;
+  String? _profilePhotoUrl;
+
+  @override
+  void initState() {
+    super.initState();
+    _getDataUser();
+  }
+
+  _getDataUser() async {
+    SharedPreferences _preferences = await SharedPreferences.getInstance();
+    setState(() {
+      _name = _preferences.getString('name');
+      _username = _preferences.getString('username');
+      _token = _preferences.getString('token');
+      _profilePhotoUrl = _preferences.getString('profile_photo_url');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    AuthProvider authProvider = Provider.of<AuthProvider>(context);
-    UserModel user = authProvider.user;
-
-    handleSignOut()  {
-      _auth.logout(user.token!).then((value) {
+    
+    _handleSignOut() async {
+      await _auth.logout(_token ?? "").then((value) {
         Navigator.pushNamedAndRemoveUntil(
             context, '/sign-in', (route) => false);
       });
+    }
+
+    _removeDataUser() async {
+      SharedPreferences _preferences = await SharedPreferences.getInstance();
+        await _preferences.remove("id");
+        await _preferences.remove("token");
+        await _preferences.remove("name");
+        await _preferences.remove("email");
+        await _preferences.remove("username");
+        await _preferences.remove("address");
+        await _preferences.remove("profile_photo_url");
     }
 
     Widget header() {
@@ -35,7 +68,7 @@ class ProfilePage extends StatelessWidget {
               children: [
                 ClipOval(
                   child: Image.network(
-                    user.profilePhotoUrl,
+                    _profilePhotoUrl ?? "https://titan-autoparts.com/development/wp-content/uploads/2019/09/no.png",
                     width: 64,
                   ),
                 ),
@@ -47,14 +80,14 @@ class ProfilePage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Hallo, ${user.name}',
+                        'Hallo, $_name',
                         style: primaryTextStyle.copyWith(
                           fontSize: 24,
                           fontWeight: semiBold,
                         ),
                       ),
                       Text(
-                        '@${user.username}',
+                        '@$_username',
                         style: subtitleTextStyle.copyWith(
                           fontSize: 16,
                         ),
@@ -64,7 +97,8 @@ class ProfilePage extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    handleSignOut();
+                    _handleSignOut();
+                    _removeDataUser();
                   },
                   child: Image.asset(
                     'assets/button_exit.png',

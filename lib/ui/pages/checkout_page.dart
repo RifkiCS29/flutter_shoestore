@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_shoestore/providers/auth_provider.dart';
 import 'package:flutter_shoestore/providers/cart_provider.dart';
 import 'package:flutter_shoestore/providers/transaction_provider.dart';
 import 'package:flutter_shoestore/theme/theme.dart';
 import 'package:flutter_shoestore/ui/widgets/checkout_card.dart';
 import 'package:flutter_shoestore/ui/widgets/loading_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CheckoutPage extends StatefulWidget {
   @override
@@ -15,12 +15,28 @@ class CheckoutPage extends StatefulWidget {
 class _CheckoutPageState extends State<CheckoutPage> {
   bool isLoading = false;
 
+  String? _token;
+  String? _address;
+
+  @override
+  void initState() {
+    super.initState();
+    _getDataUser();
+  }
+
+  _getDataUser() async {
+    SharedPreferences _preferences = await SharedPreferences.getInstance();
+    setState(() {
+      _token = _preferences.getString('token');
+      _address = _preferences.getString('address');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     CartProvider cartProvider = Provider.of<CartProvider>(context);
     TransactionProvider transactionProvider =
         Provider.of<TransactionProvider>(context);
-    AuthProvider authProvider = Provider.of<AuthProvider>(context);
 
     handleCheckout() async {
       setState(() {
@@ -28,9 +44,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
       });
 
       if (await transactionProvider.checkout(
-        authProvider.user.token!,
+        _token ?? "",
         cartProvider.carts,
-        authProvider.user.address,
+        _address ?? "",
         cartProvider.totalPrice(),
       )) {
         cartProvider.carts = [];
@@ -158,7 +174,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                             ),
                           ),
                           Text(
-                            authProvider.user.address,
+                            _address ?? "",
                             style: primaryTextStyle.copyWith(
                               fontWeight: medium,
                             ),

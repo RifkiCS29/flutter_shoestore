@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_shoestore/providers/auth_provider.dart';
 import 'package:flutter_shoestore/theme/theme.dart';
 import 'package:flutter_shoestore/ui/widgets/loading_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInPage extends StatefulWidget {
   @override
@@ -28,6 +29,14 @@ class _SignInPageState extends State<SignInPage> {
         email: emailController.text.toString(),
         password: passwordController.text.toString(),
       )) {
+        SharedPreferences _preferences = await SharedPreferences.getInstance();
+        await _preferences.setInt("id", authProvider.user.id);
+        await _preferences.setString("token", authProvider.user.token ?? "");
+        await _preferences.setString("name", authProvider.user.name);
+        await _preferences.setString("email", authProvider.user.email);
+        await _preferences.setString("username", authProvider.user.username);
+        await _preferences.setString("address", authProvider.user.address);
+        await _preferences.setString("profile_photo_url", authProvider.user.profilePhotoUrl);
         Navigator.pushReplacementNamed(context, '/home');
       } else {
         ScaffoldMessenger.of(context).showSnackBar(

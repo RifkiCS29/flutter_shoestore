@@ -2,15 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter_shoestore/theme/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_shoestore/models/message_model.dart';
-import 'package:flutter_shoestore/providers/auth_provider.dart';
 import 'package:flutter_shoestore/providers/page_provider.dart';
 import 'package:flutter_shoestore/services/message_service.dart';
 import 'package:flutter_shoestore/ui/widgets/chat_tile.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class ChatPage extends StatelessWidget {
+class ChatPage extends StatefulWidget {
+  @override
+  State<ChatPage> createState() => _ChatPageState();
+}
+
+class _ChatPageState extends State<ChatPage> {
+
+  int? _id;
+
+  @override
+  void initState() {
+    super.initState();
+    _getDataUser();
+  }
+
+  _getDataUser() async {
+    SharedPreferences _preferences = await SharedPreferences.getInstance();
+    setState(() {
+      _id = _preferences.getInt('id');
+    });
+  }
+  
   @override
   Widget build(BuildContext context) {
-    AuthProvider authProvider = Provider.of<AuthProvider>(context);
     PageProvider pageProvider = Provider.of<PageProvider>(context);
 
     Widget header() {
@@ -95,7 +115,7 @@ class ChatPage extends StatelessWidget {
     Widget content() {
       return StreamBuilder<List<MessageModel>>(
           stream: MessageService()
-              .getMessagesByUserId(authProvider.user.id),
+              .getMessagesByUserId(_id ?? 0),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               if (snapshot.data!.length == 0) {

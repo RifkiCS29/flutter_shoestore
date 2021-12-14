@@ -1,14 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter_shoestore/models/user_model.dart';
-import 'package:flutter_shoestore/providers/auth_provider.dart';
 import 'package:flutter_shoestore/theme/theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class EditProfilePage extends StatelessWidget {
+class EditProfilePage extends StatefulWidget {
+  @override
+  State<EditProfilePage> createState() => _EditProfilePageState();
+}
+
+class _EditProfilePageState extends State<EditProfilePage> {
+
+  String? _name;
+  String? _username;
+  String? _email;
+  String? _profilePhotoUrl;
+
+  @override
+  void initState() {
+    super.initState();
+    _getDataUser();
+  }
+
+  _getDataUser() async {
+    SharedPreferences _preferences = await SharedPreferences.getInstance();
+    setState(() {
+      _name = _preferences.getString('name');
+      _username = _preferences.getString('username');
+      _email = _preferences.getString('email');
+      _profilePhotoUrl = _preferences.getString('profile_photo_url');
+    });
+  }
+  
   @override
   Widget build(BuildContext context) {
-    AuthProvider authProvider = Provider.of<AuthProvider>(context);
-    UserModel user = authProvider.user;
 
     header() {
       return AppBar(
@@ -53,7 +76,7 @@ class EditProfilePage extends StatelessWidget {
             TextFormField(
               style: primaryTextStyle,
               decoration: InputDecoration(
-                hintText: user.name,
+                hintText: _name,
                 hintStyle: primaryTextStyle,
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
@@ -84,7 +107,7 @@ class EditProfilePage extends StatelessWidget {
             TextFormField(
               style: primaryTextStyle,
               decoration: InputDecoration(
-                hintText: '@${user.username}',
+                hintText: '@$_username',
                 hintStyle: primaryTextStyle,
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
@@ -115,7 +138,7 @@ class EditProfilePage extends StatelessWidget {
             TextFormField(
               style: primaryTextStyle,
               decoration: InputDecoration(
-                hintText: user.email,
+                hintText: _email,
                 hintStyle: primaryTextStyle,
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
@@ -149,7 +172,7 @@ class EditProfilePage extends StatelessWidget {
                 image: DecorationImage(
                   fit: BoxFit.fill,
                   image: NetworkImage(
-                    user.profilePhotoUrl,
+                    _profilePhotoUrl ?? "https://titan-autoparts.com/development/wp-content/uploads/2019/09/no.png",
                   ),
                 ),
               ),

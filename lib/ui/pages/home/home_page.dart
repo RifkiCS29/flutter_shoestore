@@ -1,17 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_shoestore/models/user_model.dart';
-import 'package:flutter_shoestore/providers/auth_provider.dart';
 import 'package:flutter_shoestore/providers/product_provider.dart';
 import 'package:flutter_shoestore/theme/theme.dart';
 import 'package:flutter_shoestore/ui/widgets/product_card.dart';
 import 'package:flutter_shoestore/ui/widgets/product_tile.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String? _name;
+  String? _email;
+  String? _profilePhotoUrl;
+
+  @override
+  void initState() {
+    super.initState();
+    _getDataUser();
+  }
+
+  _getDataUser() async {
+    SharedPreferences _preferences = await SharedPreferences.getInstance();
+    setState(() {
+      _name = _preferences.getString('name');
+      _email = _preferences.getString('email');
+      _profilePhotoUrl = _preferences.getString('profile_photo_url');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    AuthProvider authProvider = Provider.of<AuthProvider>(context);
-    UserModel user = authProvider.user;
     ProductProvider productProvider = Provider.of<ProductProvider>(context);
 
     Widget header() {
@@ -28,14 +49,14 @@ class HomePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Hallo, ${user.name}',
+                    'Hallo, $_name',
                     style: primaryTextStyle.copyWith(
                       fontSize: 24,
                       fontWeight: semiBold,
                     ),
                   ),
                   Text(
-                    '@${user.username}',
+                    '@$_email',
                     style: subtitleTextStyle.copyWith(
                       fontSize: 16,
                     ),
@@ -50,7 +71,7 @@ class HomePage extends StatelessWidget {
                 shape: BoxShape.circle,
                 image: DecorationImage(
                   image: NetworkImage(
-                    user.profilePhotoUrl,
+                    _profilePhotoUrl ?? "https://titan-autoparts.com/development/wp-content/uploads/2019/09/no.png",
                   ),
                 ),
               ),
