@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shoestore/services/auth_service.dart';
 import 'package:flutter_shoestore/theme/theme.dart';
+import 'package:flutter_shoestore/ui/widgets/loading_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -11,6 +11,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   final AuthService _auth = AuthService();
+  bool _isLoading = false;
 
   String? _name;
   String? _username;
@@ -35,23 +36,30 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    
     _handleSignOut() async {
+      setState(() {
+        _isLoading = true;
+      });
+
       await _auth.logout(_token ?? "").then((value) {
         Navigator.pushNamedAndRemoveUntil(
             context, '/sign-in', (route) => false);
+      });
+
+      setState(() {
+        _isLoading = false;
       });
     }
 
     _removeDataUser() async {
       SharedPreferences _preferences = await SharedPreferences.getInstance();
-        await _preferences.remove("id");
-        await _preferences.remove("token");
-        await _preferences.remove("name");
-        await _preferences.remove("email");
-        await _preferences.remove("username");
-        await _preferences.remove("address");
-        await _preferences.remove("profile_photo_url");
+      await _preferences.remove("id");
+      await _preferences.remove("token");
+      await _preferences.remove("name");
+      await _preferences.remove("email");
+      await _preferences.remove("username");
+      await _preferences.remove("address");
+      await _preferences.remove("profile_photo_url");
     }
 
     Widget header() {
@@ -68,7 +76,8 @@ class _ProfilePageState extends State<ProfilePage> {
               children: [
                 ClipOval(
                   child: Image.network(
-                    _profilePhotoUrl ?? "https://titan-autoparts.com/development/wp-content/uploads/2019/09/no.png",
+                    _profilePhotoUrl ??
+                        "https://titan-autoparts.com/development/wp-content/uploads/2019/09/no.png",
                     width: 64,
                   ),
                 ),
@@ -93,16 +102,6 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                     ],
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    _handleSignOut();
-                    _removeDataUser();
-                  },
-                  child: Image.asset(
-                    'assets/button_exit.png',
-                    width: 20,
                   ),
                 ),
               ],
@@ -193,10 +192,52 @@ class _ProfilePageState extends State<ProfilePage> {
       );
     }
 
+    Widget signOutButton() {
+      return Padding(
+        padding: EdgeInsets.fromLTRB(
+          defaultMargin, 10, defaultMargin, 140
+        ),
+        child: _isLoading
+            ? Container(
+                margin: EdgeInsets.only(
+                  bottom: 30,
+                ),
+                child: LoadingButton(),
+              )
+            : Container(
+                height: 50,
+                width: double.infinity,
+                margin: EdgeInsets.symmetric(
+                  vertical: defaultMargin,
+                ),
+                child: TextButton(
+                  onPressed: () {
+                    _handleSignOut();
+                    _removeDataUser();
+                  },
+                  style: TextButton.styleFrom(
+                    backgroundColor: primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: Text(
+                    'Sign Out',
+                    style: primaryTextStyle.copyWith(
+                      fontSize: 16,
+                      fontWeight: semiBold,
+                    ),
+                  ),
+                ),
+              ),
+      );
+    }
+
     return Column(
       children: [
         header(),
         content(),
+        signOutButton(),
       ],
     );
   }
