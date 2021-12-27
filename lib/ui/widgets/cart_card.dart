@@ -13,6 +13,7 @@ class CartCard extends StatelessWidget {
     CartProvider cartProvider = Provider.of<CartProvider>(context);
 
     return Container(
+      key: Key(cart.id.toString()),
       margin: EdgeInsets.only(
         top: defaultMargin,
       ),
@@ -85,7 +86,7 @@ class CartCard extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      // cartProvider.reduceQuantity(cart.id);
+                      cartProvider.reduceQuantity(cart.id);
                     },
                     child: Image.asset(
                       'assets/button_min.png',
@@ -101,7 +102,7 @@ class CartCard extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              // cartProvider.removeCart(cart.id);
+              cartProvider.removeCart(cart.id);
             },
             child: Row(
               children: [
